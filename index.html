@@ -7,32 +7,80 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="assets/css/reset.css" type="text/css" rel="stylesheet">
     <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,700" rel="stylesheet"> 
     <!-- Added link to the jQuery Library -->
-    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
     <title>Starfleet Deployment</title>
 </head>
 
 <body>
-    <header>
-        <h1>Starfleet Starship Deployment</h1>
-        <div class="instructions">
+    <nav>
+        <img class="bulletlogo" src="images/3graphics1.jpg" title="Online Systems">
+        <div class="indexheader">
+            <h1>Starfleet Starship Deployment</h1>
+        </div>
+        <div class="text">
             <p></p>
         </div>
-    </header>
+    </nav>
     <main>
-        <section class="shiplist">
-            
-
-<span class="timer"></span>
+        <header>
+            <h2>Fleet Deployment</h2>
+            <h4>Stardate 1809.12</h4>
+        </header>
+        <section class="shiplist" class="text">
+            <table>
+                <tr>
+                    <th>Starship</th>
+                    <th>Home Starbase</th>
+                    <th>Patrol Duration</th>
+                    <th>Next Arrival</th>
+                    <th>ETA</th>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <div class="newships"></div>
+            </table>
         </section>
-        <section class="newshipform">
+        <header>
+            <h2>Deploy Starship</h2>
+            <h4>Starbase 47</h4>
+        </header>
+         <section class="newshipform" class="favorite-list">
+            <p>
+                <label>Starship Name</label>
+                <br>
+                <input type="text" placeholder="Enterprise" id="display-name" name="ip-display" pattern="[A-Za-z\s]+" minlength="2" size="10"
+                    required />
+            </p>
+            <p>
+                <label>Home Port</label>
+                <br>
+                <input type="text" placeholder="Vulcan" size="10" required />
+            </p>
+            <p>
+                <label>Time Of Launch (HH:mm - military time)</label>
+                <br>
+                <input type="text" placeholder="7:40" size="10" required />
+            </p>
+            <p>
+                <label>Duration of Patrol (minutes)</label>
+                <br>
+                <input type="text" placeholder="47" size="10" required />
+            </p>
 
-
-<button class="startgame" value="startgame" id="startgame"></button>
-
+<ul>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="#favorite">Motivators</a></li>
+</ul>
+            <p>
+                <button class="addship" value="addship" id="addship">Launch</button>
+            </p>
         </section>
     </main>
-
+    <footer>
+        <p><strong>All content copyright William B. Swift stardate 1809.12</strong></p>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/javascript/game.js" type="text/javascript"></script>
 
