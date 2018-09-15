@@ -12,77 +12,67 @@
     <title>Starfleet Deployment</title>
 
 <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  let config = {
-    apiKey: "AIzaSyDv5rZU0ZW_kJohQ6A2c5PVnT91fz1jee0",
-    authDomain: "starfleet-patrol.firebaseapp.com",
-    databaseURL: "https://starfleet-patrol.firebaseio.com",
-    projectId: "starfleet-patrol",
-    storageBucket: "starfleet-patrol.appspot.com",
-    messagingSenderId: "590431002658"
-  };
-  firebase.initializeApp(config);
-</script>
-
 
 </head>
 
 <body>
     <nav>
-        <img class="bulletlogo" src="images/3graphics1.jpg" title="Online Systems">
+        <img class="bulletlogo" src="assets/images/9deflector1.jpg" title="Master Display">
         <div class="indexheader">
-            <h1>Starfleet Starship Deployment</h1>
+            <h1>Starfleet Deployment</h1>
         </div>
-        <div class="text">
+        <div>
             <p></p>
         </div>
     </nav>
     <main>
         <header>
-            <h2>Fleet Deployment</h2>
+            <h2>Starship Patrol Assignments</h2>
             <h4>Stardate 1809.12</h4>
         </header>
-        <section class="shiplist" class="text">
-            <table>
+        <section class="text">
+            <table class="shiplist">
                 <tr>
                     <th>Starship</th>
+                    <th>Registry</th>
                     <th>Home Starbase</th>
                     <th>Patrol Duration</th>
                     <th>Next Arrival</th>
                     <th>ETA</th>
                 </tr>
-                <tr>
+                </table>
+                <table id="newships"></table> 
+                
+<!--            <tr>
                     <td></td>
                 </tr>
-                <div class="newships"></div>
-            </table>
+-->
         </section>
         <header>
             <h2>Deploy Starship</h2>
             <h4>Starbase 47</h4>
         </header>
-         <section class="newshipform" class="favorite-list">
+         <section class="newshipform">
             <p>
                 <label>Starship Name</label>
                 <br>
-                <input type="text" placeholder="Enterprise" id="display-name" name="ip-display" pattern="[A-Za-z\s]+" minlength="2" size="10"
+                <input type="text" placeholder="Enterprise" id="starship" name="ip-display" pattern="[A-Za-z\s]+" minlength="2" size="10"
                     required />
             </p>
             <p>
                 <label>Home Port</label>
                 <br>
-                <input type="text" placeholder="Vulcan" size="10" required />
+                <input type="text" placeholder="Vulcan" id="starbase" size="10" required />
             </p>
             <p>
                 <label>Time Of Launch (HH:mm - military time)</label>
                 <br>
-                <input type="text" placeholder="7:40" size="10" required />
+                <input type="text" placeholder="20:30" id="launch" size="10" required />
             </p>
             <p>
                 <label>Duration of Patrol (minutes)</label>
                 <br>
-                <input type="text" placeholder="47" size="10" required />
+                <input type="text" placeholder="50" id="duration" size="10" required />
             </p>
 
 <ul>
@@ -90,7 +80,7 @@
     <li><a href="#favorite">Motivators</a></li>
 </ul>
             <p>
-                <button class="addship" value="addship" id="addship">Launch</button>
+                <button class="addship" value="addship" id="addship">Engage Mission</button>
             </p>
         </section>
     </main>

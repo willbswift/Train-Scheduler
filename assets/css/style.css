@@ -31,6 +31,7 @@
 				color: #5a5692;
 			}
 			body {
+				max-width: 1280px;
 				font-family: Arial, Helvetica, serif;
 				color: #5a5692;
 				font-size: 1.4rem;
@@ -44,33 +45,14 @@
 				border: solid 6px #0c05e0;
 				border-radius: 10px;
 			}
-			a {
-				color: #98fa63;
-				text-decoration: none;
-			}
-			a:visited {
-				color: #8acbf1;
-      		}
-      		a:hover {
-      			background-color: red;
-        		color: black;
-      		}
-      		a:active {
-      			color: red;
-      		}
-      		a:focus {
-        		background-color: #98fa63;
-        		color: black;
-        		border-radius: 10px;
-      		}
+
 			nav {
-				max-width: 1280px;
 				box-sizing: border-box;
 				background: #0C2A72;
 				display: flex;
 				justify-content: flex-end;
 	      		top: 0;
-	      		margin: .4rem;
+	      		margin: 50rem;
 	      		margin-bottom: 0px;
 	      		padding: 0rem;
 	      		justify-content: space-between;
@@ -80,40 +62,8 @@
 								margin: auto;
 				margin-top: 0;
 			}
-			nav ul {
-				padding-left: 0;
-				margin-right: 10px;
-			}
-			nav ul li {
-				display: inline;
-				padding-right: 0.3rem;
-			}
-			nav a {
-				color: black;
-				font-family: Titillium Web, Arial, sans-serif;
-				font-weight: bold;
-				text-decoration: none;
-				text-transform: uppercase;
-				background-color: #98fa63;
-				padding: 5px 25px;
-				border-radius: 10px;
-			}
-			nav a:visited {
-				color: black;
-				background-color: #8acbf1;
-      		}
-      		nav a:hover {
-      			color: black;
-      			background-color: red;
-      		}
-      		nav a:active {
-      			color: white;
-      			background-color: red;
-      		}
-      		nav a:focus {
-      			color: black;
-        		background-color: #218a24;
-      		}
+
+
 			main {
 				box-sizing: border-box;
 				max-width: 1280px;
@@ -131,6 +81,11 @@
 				border-top-left-radius: 20px;
 				border-bottom-right-radius: 0px;
 				border-bottom-left-radius: 0px;
+			}
+			table {
+				text-align: center;
+			}
+			tr {
 			}
 			section {
 	      		margin: .4rem;
@@ -172,87 +127,14 @@
     			box-sizing: border-box;
 				text-align: center;
       		}
-			.head-shot {
-				width: 400px;
-				height: auto;
-				float: left;
-				margin: 5px;
-				margin-right: 1rem;
-			}
+
 			.text {
 				padding: 1rem;
 				border: solid 6px #0c05e0;
 				border-bottom-right-radius: 20px;
 				border-bottom-left-radius: 20px;
 			}
-			.favorite-list {
-				display: flex;
-				flex-wrap: wrap;
-			}
-			.favorite-thing {
-				text-align: center;
-				border: none;
-				flex: 1 1 200px;
-			}
-			.favorite-thing p {
-				text-align: left;
-			}
-			.favorite-thing ul {
-				text-align: left;
-			}
-			.favorite-thing img {
-				box-sizing: border-box;
-				width: auto;				
-				max-height: 300px;
-			}
-    		.hero {
-    			box-sizing: border-box;
-				display: block;
 
-				text-align: center;
-				background-color: black;
-				background-image: url(../images/2proxima.png);
-				background-repeat: no-repeat;
-				margin-top: 0px;
-				margin-bottom: 0px;
-				background-position: center top;
-				background-size: 100% auto;
-				padding-top: 5%;
-				padding-bottom: 32%;
-			}
-			.hero h1 {
-				margin-bottom: 0;
-			}
-			.portfolio {
-				display: flex;
-				flex-wrap: wrap;
-			}
-			.portfolio-tag {
-				border: none;
-				flex: 1 1 200px;
-			}
-			.portfolio-tag img {
-				box-sizing: border-box;
-				display: block;
-				text-align: center;
-				border-color: #8acbf1;
-				border-width: 3px;
-				max-width: 400px;
-				margin-top: 1rem;
-	    		margin-left: auto;
-	    		margin-right: auto;
-	    		border-radius: 21px;
-			}
-			.portfolio-tag h4 {
-				text-align: center;
-				margin-top: .5rem;
-				margin-bottom: 0;
-			}
-			.portfolio-tag p {
-				text-align: center;
-				margin-top: 0;
-				margin-bottom: 3rem;
-			}
 			.noborder-pic {
 				border: none;
 			}
@@ -260,11 +142,28 @@
 button {
 	height: 2.7rem;
 	width: 24rem;
-	background-color: #FE9800;
-	-webkit-border-radius: 1.35rem;
-  	-moz-border-radius: 1.35rem;
-  	border-radius: 1.35rem;
+	color: black;
+	font-family: Titillium Web, Arial, sans-serif;
   	border: none;
-  	text-transform: uppercase;
   	margin: .35rem;
+  	font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+	background-color: #98fa63;
+	padding: 5px 25px;
+	border-radius: 10px;
 }
+
+button:hover {
+	background-color: red;
+	color: black;
+}
+button:active {
+	color: red;
+}
+button:focus {
+	background-color: #98fa63;
+	color: black;
+	border-radius: 10px;
+}
+
