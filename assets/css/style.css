@@ -30,6 +30,9 @@
 				font-size: 1.4rem;
 				color: #5a5692;
 			}
+			p {
+				margin: 1rem;
+			}
 			body {
 				max-width: 1280px;
 				font-family: Arial, Helvetica, serif;
@@ -52,15 +55,14 @@
 				display: flex;
 				justify-content: flex-end;
 	      		top: 0;
-	      		margin: 50rem;
+	      		margin: auto;
+	      		margin-top: 0;
 	      		margin-bottom: 0px;
 	      		padding: 0rem;
 	      		justify-content: space-between;
 				align-items: flex-end; 
 				border: solid 6px #0c05e0;
 				border-radius: 20px;
-								margin: auto;
-				margin-top: 0;
 			}
 
 
@@ -72,7 +74,7 @@
 				clear: both;
 			}
 			header {
-				margin: .4rem;
+				margin: 0;
 				margin-top: .8rem;
 				padding: 0;
 				padding-left: 1rem;
@@ -87,15 +89,25 @@
 			}
 			tr {
 			}
+			th {
+				margin: 5rem;
+				padding: .5rem;
+			}
+			td {
+				color: white;
+				margin: 5rem;
+				padding: .5rem;
+			}
 			section {
-	      		margin: .4rem;
+	      		margin: 0;
 	      		border: solid 6px #0c05e0;
 			}
 			footer {
 				color: #8acbf1;
 				background: #0C2A72;
 				max-width: 1280px;
-				margin: .4rem;
+				margin: auto;
+				margin-top: 0;
 				margin-bottom: .8rem;
 				padding: 0;
 				padding-left: 1rem;
@@ -104,18 +116,9 @@
 				border-top-left-radius: 0px;
 				border-bottom-right-radius: 20px;
 				border-bottom-left-radius: 20px;
-				margin: auto;
-				margin-top: 0;
+	
 			}
-			hr {
-      			border: 6px solid #0c05e0;
-      			margin-bottom: 2rem;
-      			margin-left: -1rem;
-      			margin-right: -1rem;
-    		}
-    		ul {
-    			list-style-type: square;
-    		}
+
     		.bulletlogo {
     			width: auto;
 				height: 9rem;
@@ -141,7 +144,7 @@
 
 button {
 	height: 2.7rem;
-	width: 24rem;
+	width: 15rem;
 	color: black;
 	font-family: Titillium Web, Arial, sans-serif;
   	border: none;

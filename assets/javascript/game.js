@@ -23,16 +23,54 @@ $(document).ready(function () {
 	let starbase = "Vulcan";
 	let launchTime = "20:30";
 	let duration = "50";
+	let nextArrival = 0;
+    let eta = 0;
 
 //placeholder for eta calcuation stuff
-    let nextArrival = "21:20";
-    let eta = "50";
+    nextArrival = "21:20";
+    eta = "47";
+
+	function getRandomIntInclusive(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  return registery = Math.floor(Math.random() * (max - min + 1)) + min; 
+	}
+
+
+	// --------------------------------------------------------------
+
+		// Whenever a user clicks the launch button
+	$("#addship").on("click", function(event) {
+	  	event.preventDefault();
+
+		starship = $("#starship").val().trim();
+		starbase = $("#starbase").val().trim();
+		launchTime = $("#launch").val().trim();
+		duration = $("#duration").val().trim();
+		duration = parseInt(duration);
+	  	getRandomIntInclusive(1, 999);
+
+	 //  	console.log(starship);
+		// console.log(registery);
+		// console.log(starbase);
+		// console.log(launchTime);
+		// console.log(duration);
+
+	    	// Save the new date in Firebase. This will cause our "value" callback above to fire and update the UI.
+	    database.ref("/shiplist1").push({
+	      	starship: starship,
+			registery: registery,
+			starbase: starbase,
+			launchTime: launchTime,
+			duration: duration
+	    });
+	});
 
 	// --------------------------------------------------------------
 
 		// At the initial load and subsequent value changes, get a snapshot of the stored data.
 		// This function allows you to update your page in real-time when the firebase database changes.
-	database.ref().on("value", function(snapshot) {
+	database.ref("/shiplist1").on("child_added", function(snapshot) {
 
 	    // Set the variables equal to the stored values.
 	    starship = snapshot.val().starship;
@@ -41,80 +79,68 @@ $(document).ready(function () {
 	    launchTime = snapshot.val().launchTime;
 //launchTime = parseInt(launchTime);
 	    duration = snapshot.val().duration;
+
+	// --------------------------------------------------------------
+
+	// Calculate the minutes until arrival using hardcore math
 	    duration = parseInt(duration);
-	
-		console.log(starship);
-		console.log(registery);
-		console.log(starbase);
+
+    launchTime = moment(launchTime, "HH:mm").subtract(1, "years");
+
+    	// Current Time
+    let currentTime = moment();
+    	console.log(moment(currentTime).format("hh:mm"));
 		console.log(launchTime);
-		console.log(duration);
 
-		newShipLine = /*"<tr><th>Starship</th><th>Registry</th><th>Home Starbase</th><th>Patrol Duration</th><th>Next Arrival</th><th>ETA</th></tr>+"*/    "<tr>  <td>USS "+starship+"</td>  <td>NCC-1"+registery+"</td>  <td>"+starbase+"</td>  <td>"+duration+" Minutes</td>  <td>"+nextArrival+"</td>  <td>"+eta+" Minutes</td></tr>";
+    	// Difference between the times
+    //let timeDiff = moment().diff(moment(launchTime), "hh:mm");
 
-		$("#newships").html(newShipLine);
+//let months = moment(snapshot.val().date, 'YYYY-MM-DD').fromNow();
+//console.log("Time Worked is "+ months);
 
+//convert start time to unix time
+//convert duration to unix time
+    duration = duration * 60000
+
+			// To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time and find the modulus between the difference and the frequency.
+let timeDiff = moment().diff(launchTime, "hh:mm");
+    	console.log("DIFFERENCE IN TIME: " + timeDiff);
+
+let remainderTime = timeDiff % duration;
+eta = duration - remainderTime;
+// To calculate the arrival time, add the tMinutes to the current time
+nextArrival = moment().add(eta, "m").format("hh:mm A");
+	
+		// console.log(starship);
+		// console.log(registery);
+		// console.log(starbase);
+		// console.log(launchTime);
+		// console.log(duration);
+
+      	let tableHtml = $("<tr>");
+      	let shipHtml = $("<td>").text("USS " + snapshot.val().starship);
+      	let registeryHtml = $("<td>").text("NCC-1" + snapshot.val().registery);
+      	let starbaseHtml = $("<td>").text(snapshot.val().starbase);
+      	let durationHtml = $("<td>").text(snapshot.val().duration);
+      	let nextArrivalHtml = $("<td>").text(nextArrival);
+      	let etaHtml = $("<td>").text(eta);
+
+      	tableHtml.append(shipHtml).append(registeryHtml).append(starbaseHtml).append(durationHtml).append(nextArrivalHtml).append(etaHtml);
+
+      	$("#fleet").append(tableHtml);
 
 		  // If any errors are experienced, log them to console.
 		}, function(errorObject) {
 		  console.log("The read failed: " + errorObject.code);
 	});
 
-// --------------------------------------------------------------
 
-    // Save the data in Firebase. This will cause our "value" callback above to fire and update
-    // the UI.
-    database.ref().set({
-      	starship: starship,
-		registery: registery,
-		starbase: starbase,
-		launchTime: launchTime,
-		duration: duration
-    });
 
-  // Save new value to Firebase
-  database.ref("/shiplist2").push({
-    starship: starship
-  });
 
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return registery = Math.floor(Math.random() * (max - min + 1)) + min; 
-}
 
-	// Whenever a user clicks the launch button
-$("#addship").on("click", function(event) {
-  	event.preventDefault();
 
-	let starship = $("#starship").val().trim();
-	let starbase = $("#starbase").val().trim();
-	let launchTime = $("#launch").val().trim();
-	let duration = $("#duration").val().trim();
-	let bidderPrice = parseInt(duration);
-  	getRandomIntInclusive(1, 999);
 
-  	console.log(starship);
-	console.log(registery);
-	console.log(starbase);
-	console.log(launchTime);
-	console.log(duration);
 
-    // Save the new price in Firebase. This will cause our "value" callback above to fire and update
-    // the UI.
-    database.ref().set({
-      	starship: starship,
-		registery: registery,
-		starbase: starbase,
-		launchTime: launchTime,
-		duration: duration
-    });
-
-  // Save new value to Firebase
-  shipList = database.ref("/shiplist2").push({
-    starship: starship
-  });
-
-});
 
 });
 
