@@ -81,30 +81,51 @@ $(document).ready(function () {
 	    duration = snapshot.val().duration;
 
 	// --------------------------------------------------------------
-
 	// Calculate the minutes until arrival using hardcore math
-	    duration = parseInt(duration);
-
-    launchTime = moment(launchTime, "HH:mm").subtract(1, "years");
 
     	// Current Time
     let currentTime = moment();
-    	console.log(moment(currentTime).format("hh:mm"));
-		console.log(launchTime);
+    let currentTimeM = moment(currentTime).format("hh:mm");
+    let currentTimeU = moment(currentTime).format("X");
+    	console.log("Current M Time: " + currentTimeM);
+    	console.log("Current U Time: " + currentTimeU);
 
+    	//subtract one day to set depature in the past.
+   	launchTime = moment(launchTime, "HH:mm").subtract(1, "days");
+		console.log(launchTime);
+		
+		//convert start time to unix time
+   	let launchTimeM = moment(launchTime, "HH:mm").format("hh:mm");
+   	let launchTimeU = moment(launchTime, "HH:mm").format("X");
+   	    console.log("Launch M Time: " + launchTimeM);
+    	console.log("Launch U Time: " + launchTimeU);
+		
     	// Difference between the times
-    //let timeDiff = moment().diff(moment(launchTime), "hh:mm");
+    let timeDiffM = moment().diff(moment(new Date(launchTimeM)), "hh:mm");
+    let timeDiffU = moment().diff(moment(new Date(launchTimeU)), "X");
+    let timeDiff = moment().diff(moment(launchTime));
+	    console.log(timeDiffM);
+		console.log(timeDiffU);
+	   	console.log(timeDiff);
+		console.log("*How Long Ago: " + moment(timeDiffM).format("hh:mm"));
+		console.log("*How Long Ago U: " + moment(timeDiffU).format("X"));
+		console.log("*How Long Ago test: " + moment(timeDiff).format("hh:mm"));
+
+ timeDiff = moment().diff(launchTime, "hh:mm");
+    	console.log("DIFFERENCE IN TIME: " + timeDiff);
 
 //let months = moment(snapshot.val().date, 'YYYY-MM-DD').fromNow();
 //console.log("Time Worked is "+ months);
 
-//convert start time to unix time
 //convert duration to unix time
-    duration = duration * 60000
 
 			// To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time and find the modulus between the difference and the frequency.
-let timeDiff = moment().diff(launchTime, "hh:mm");
-    	console.log("DIFFERENCE IN TIME: " + timeDiff);
+
+	    duration = parseInt(duration);
+    	let durationU = duration * 60000
+    	let durationUcheck = moment().diff(moment(durationU), "hh:mm");
+			console.log("*How Long Ago test: " + durationUcheck);
+
 
 let remainderTime = timeDiff % duration;
 eta = duration - remainderTime;
