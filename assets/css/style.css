@@ -135,6 +135,7 @@
 				padding: 0px 20px;
 				border-radius: 10px;
 				border: none;
+				margin-top: .3rem;
 
 			}
     		.bulletlogo {
@@ -159,6 +160,11 @@
 			}
 			.form {
 				float: left;
+				margin-left: 1rem;
+			}
+			.form p {
+				margin-bottom: 0;
+				margin-left: 0;
 			}
 			.viewport {
 				max-width: 50rem;
