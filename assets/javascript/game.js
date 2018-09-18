@@ -191,6 +191,24 @@ $(document).ready(function () {
 		}, function(errorObject) {
 		  console.log("The read failed: " + errorObject.code);
 	});
+
+	$("#reset").on("click", function(event) {
+	  	event.preventDefault();
+
+	  	let audioElement = document.createElement("audio");
+	    audioElement.setAttribute("src", "assets/sound/restart.mp3");
+	    audioElement.play();
+
+      setTimeout(function () {
+
+	  	window.location.reload(false);
+
+
+      }, 3000);
+
+
+	});
+
 });
 
 

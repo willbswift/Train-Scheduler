@@ -137,14 +137,26 @@
 				border: none;
 
 			}
-
+    		.bulletlogo {
+    			width: auto;
+				height: 9rem;
+				border: solid 6px #0c05e0;
+				border-radius: 20px;
+				margin: -6px;
+    		}
+    		.notes {
+    			float:left;
+    		}
+    		.reset {
+    			text-align: right;
+    			margin-right: 2rem;
+    		}
 			.stardate {
 				display: inline-block;
 				white-space: nowrap;
     			overflow-x: auto;
     			overflow-y: hidden;
 			}
-
 			.form {
 				float: left;
 			}
@@ -157,14 +169,6 @@
 				border-radius: 0px;
 				text-align: right;
 			}
-
-    		.bulletlogo {
-    			width: auto;
-				height: 9rem;
-				border: solid 6px #0c05e0;
-				border-radius: 20px;
-				margin: -6px;
-    		}
     		.indexheader {
     			box-sizing: border-box;
 				text-align: center;
