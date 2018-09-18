@@ -18,24 +18,20 @@ $(document).ready(function () {
 	let database = firebase.database();
 
 		// Initial Values
-	let starship = "Enterprise";
-	let registery = "701";
-	let starbase = "Vulcan";
-	let launchTime = "20:30";
-	let duration = "50";
-	let nextArrival = 0;
-    let eta = 0;
-
-//placeholder for eta calcuation stuff
-    nextArrival = "21:20";
-    eta = "47";
+	let starship = "";
+	let registery = "";
+	let starbase = "";
+	let launchTime = "";
+	let duration = "";
+	let nextArrival = "";
+    let eta = "";
+	let etaM = "";
 
 	function getRandomIntInclusive(min, max) {
 	  min = Math.ceil(min);
 	  max = Math.floor(max);
 	  return registery = Math.floor(Math.random() * (max - min + 1)) + min; 
 	}
-
 
 	// --------------------------------------------------------------
 
@@ -77,7 +73,6 @@ $(document).ready(function () {
 	    registery = snapshot.val().registery;
 	    starbase = snapshot.val().starbase;
 	    launchTime = snapshot.val().launchTime;
-//launchTime = parseInt(launchTime);
 	    duration = snapshot.val().duration;
 
 	// --------------------------------------------------------------
@@ -85,66 +80,99 @@ $(document).ready(function () {
 
     	// Current Time
     let currentTime = moment();
-    let currentTimeM = moment(currentTime).format("hh:mm");
+    let currentTimeM = moment(currentTime).format("HH:mm");
     let currentTimeU = moment(currentTime).format("X");
     	console.log("Current M Time: " + currentTimeM);
     	console.log("Current U Time: " + currentTimeU);
 
-    	//subtract one day to set depature in the past.
-   	launchTime = moment(launchTime, "HH:mm").subtract(1, "days");
+    let dateSD = moment(currentTime).format("DDD");
+    let stardateL = 5000 + 1000 * dateSD / 365
+    let stardateR = Math.round(stardateL * 10) / 10
+    	console.log("Stardate: " + stardateR);
+		$("#stardate").text("Current Stardate: " + stardateR);
+
+	    // First Time
+   	launchTime = moment(launchTime, "HH:mm")
 		console.log(launchTime);
-		
+
 		//convert start time to unix time
-   	let launchTimeM = moment(launchTime, "HH:mm").format("hh:mm");
-   	let launchTimeU = moment(launchTime, "HH:mm").format("X");
+   	let launchTimeM = moment(launchTime).format("HH:mm");
+   	let launchTimeU = moment(launchTime).format("X");
    	    console.log("Launch M Time: " + launchTimeM);
     	console.log("Launch U Time: " + launchTimeU);
 		
-    	// Difference between the times
-    let timeDiffM = moment().diff(moment(new Date(launchTimeM)), "hh:mm");
-    let timeDiffU = moment().diff(moment(new Date(launchTimeU)), "X");
-    let timeDiff = moment().diff(moment(launchTime));
-	    console.log(timeDiffM);
-		console.log(timeDiffU);
-	   	console.log(timeDiff);
-		console.log("*How Long Ago: " + moment(timeDiffM).format("hh:mm"));
-		console.log("*How Long Ago U: " + moment(timeDiffU).format("X"));
-		console.log("*How Long Ago test: " + moment(timeDiff).format("hh:mm"));
+	if (launchTimeU < currentTimeU) {
+    	console.log("SHIP ALREADY LAUNCHED!");
 
- timeDiff = moment().diff(launchTime, "hh:mm");
-    	console.log("DIFFERENCE IN TIME: " + timeDiff);
+	    	// Difference between the times
+		let timeDiff = moment().diff(moment(launchTime));
+				console.log(timeDiff);
+				console.log("*How Long Ago U: " + moment(timeDiff).format("X"));
+			// Calculate the minutes till arrival: take the current time in unix subtract the lauch time 
+		let timeDiffU = currentTimeU - launchTimeU;
+			console.log("*How Long Ago U check: " + timeDiffU);
 
-//let months = moment(snapshot.val().date, 'YYYY-MM-DD').fromNow();
-//console.log("Time Worked is "+ months);
+		    //convert duration to unix time
+		duration = parseInt(duration);
+		let durationU = duration * 60
+			let durationUcheck =  moment(durationU, 'X').format("m");
+			console.log("Duration check U: " + durationUcheck);
+		let durationMJS = duration * 60000
+			let durationMJScheck =  moment(durationMJS).format("m");
+			console.log("Duration check MJS: " + durationUcheck);
 
-//convert duration to unix time
+			// find the modulus between the difference and the frequency.
+		let remainderTime = timeDiff % durationMJS;
+		let remainderTimeU = timeDiffU % durationU;
+			console.log("Remainder Time: " + remainderTime);
+			console.log("Remainder U Time: " + remainderTimeU);
 
-			// To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time and find the modulus between the difference and the frequency.
+			//figure out ETA
+		eta = durationMJS - remainderTime;
+		let etaU = durationU - remainderTimeU;
+		etaM = moment(new Date(eta)).format("m");
+		let etaMU = etaU / 60;
+		etaMU = Math.round(etaMU);
+			console.log("ETA: " + etaM);
+			console.log("ETA U: " + etaMU);
 
-	    duration = parseInt(duration);
-    	let durationU = duration * 60000
-    	let durationUcheck = moment().diff(moment(durationU), "hh:mm");
-			console.log("*How Long Ago test: " + durationUcheck);
+		// To calculate the arrival time, add the eta to the current time
+	nextArrival = moment().add(eta);
+	nextArrivalM = moment(nextArrival).format("HH:mm")
+		console.log(nextArrivalM);
 
+	}
 
-let remainderTime = timeDiff % duration;
-eta = duration - remainderTime;
-// To calculate the arrival time, add the tMinutes to the current time
-nextArrival = moment().add(eta, "m").format("hh:mm A");
+	else {
+		console.log("SHIP NOT LAUNCHED YET!");
+
+		launchTimeM = moment(launchTime).format("HH:mm");
+			console.log("*Will Launch on: " + launchTimeM);
+
+		nextArrivalM = moment(launchTime).format("HH:mm");
+			console.log("*Will Launch on: " + nextArrivalM);
+
+		eta = currentTimeU - launchTimeU;
+		etaM = -1 * eta / 60;
+		etaM = Math.round(etaM);
+			console.log("*How Long to wait: " + etaM);
 	
-		// console.log(starship);
-		// console.log(registery);
-		// console.log(starbase);
-		// console.log(launchTime);
-		// console.log(duration);
+	};
+
+		console.log(starship);
+		console.log(registery);
+		console.log(starbase);
+		console.log(duration);
+		console.log(nextArrivalM);
+		console.log("*How Long to wait: " + etaM);
 
       	let tableHtml = $("<tr>");
       	let shipHtml = $("<td>").text("USS " + snapshot.val().starship);
       	let registeryHtml = $("<td>").text("NCC-1" + snapshot.val().registery);
       	let starbaseHtml = $("<td>").text(snapshot.val().starbase);
       	let durationHtml = $("<td>").text(snapshot.val().duration);
-      	let nextArrivalHtml = $("<td>").text(nextArrival);
-      	let etaHtml = $("<td>").text(eta);
+      	let nextArrivalHtml = $("<td>").text(nextArrivalM);
+      	let etaHtml = $("<td>").text(etaM);
 
       	tableHtml.append(shipHtml).append(registeryHtml).append(starbaseHtml).append(durationHtml).append(nextArrivalHtml).append(etaHtml);
 
@@ -154,15 +182,6 @@ nextArrival = moment().add(eta, "m").format("hh:mm A");
 		}, function(errorObject) {
 		  console.log("The read failed: " + errorObject.code);
 	});
-
-
-
-
-
-
-
-
-
 });
 
 

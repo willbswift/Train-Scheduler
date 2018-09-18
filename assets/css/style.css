@@ -119,6 +119,13 @@
 	
 			}
 
+			.stardate {
+				 display: inline-block;
+				white-space: nowrap;
+    			overflow-x: auto;
+    			overflow-y: hidden;
+			}
+
     		.bulletlogo {
     			width: auto;
 				height: 9rem;
