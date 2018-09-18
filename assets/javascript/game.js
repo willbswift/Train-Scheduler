@@ -85,7 +85,7 @@ $(document).ready(function () {
     	console.log("Current M Time: " + currentTimeM);
     	console.log("Current U Time: " + currentTimeU);
 
-    let dateSD = moment(currentTime).format("DDD");
+    let dateSD = moment(currentTime).format("DDDD");
     let stardateL = 5000 + 1000 * dateSD / 365
     let stardateR = Math.round(stardateL * 10) / 10
     	console.log("Stardate: " + stardateR);
@@ -106,7 +106,7 @@ $(document).ready(function () {
 
 	    	// Difference between the times
 		let timeDiff = moment().diff(moment(launchTime));
-				console.log(timeDiff);
+				//console.log(timeDiff);
 				console.log("*How Long Ago U: " + moment(timeDiff).format("X"));
 			// Calculate the minutes till arrival: take the current time in unix subtract the lauch time 
 		let timeDiffU = currentTimeU - launchTimeU;
@@ -114,10 +114,14 @@ $(document).ready(function () {
 
 		    //convert duration to unix time
 		duration = parseInt(duration);
+			console.log(duration);
 		let durationU = duration * 60
-			let durationUcheck =  moment(durationU, 'X').format("m");
+			console.log(durationU);
+		let durationUcheck = moment(durationU, 'X').format("m");
 			console.log("Duration check U: " + durationUcheck);
+
 		let durationMJS = duration * 60000
+				console.log(durationMJS);
 			let durationMJScheck =  moment(durationMJS).format("m");
 			console.log("Duration check MJS: " + durationUcheck);
 
@@ -129,15 +133,16 @@ $(document).ready(function () {
 
 			//figure out ETA
 		eta = durationMJS - remainderTime;
-		let etaU = durationU - remainderTimeU;
+		//let etaU = durationU - remainderTimeU;
 		etaM = moment(new Date(eta)).format("m");
-		let etaMU = etaU / 60;
-		etaMU = Math.round(etaMU);
+		//let etaMU = etaU / 60;
+		//etaMU = Math.round(etaMU);
 			console.log("ETA: " + etaM);
-			console.log("ETA U: " + etaMU);
+			//console.log("ETA U: " + etaMU);
 
 		// To calculate the arrival time, add the eta to the current time
 	nextArrival = moment().add(eta);
+	//nextArrivalU = moment().add(etaU);
 	nextArrivalM = moment(nextArrival).format("HH:mm")
 		console.log(nextArrivalM);
 
@@ -145,9 +150,6 @@ $(document).ready(function () {
 
 	else {
 		console.log("SHIP NOT LAUNCHED YET!");
-
-		launchTimeM = moment(launchTime).format("HH:mm");
-			console.log("*Will Launch on: " + launchTimeM);
 
 		nextArrivalM = moment(launchTime).format("HH:mm");
 			console.log("*Will Launch on: " + nextArrivalM);
@@ -159,12 +161,12 @@ $(document).ready(function () {
 	
 	};
 
-		console.log(starship);
-		console.log(registery);
-		console.log(starbase);
-		console.log(duration);
-		console.log(nextArrivalM);
-		console.log("*How Long to wait: " + etaM);
+		//console.log(starship);
+		//console.log(registery);
+		//console.log(starbase);
+		//console.log(duration);
+		//console.log(nextArrivalM);
+		//console.log("*How Long to wait: " + etaM);
 
       	let tableHtml = $("<tr>");
       	let shipHtml = $("<td>").text("USS " + snapshot.val().starship);
