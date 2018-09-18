@@ -39,6 +39,10 @@ $(document).ready(function () {
 	$("#addship").on("click", function(event) {
 	  	event.preventDefault();
 
+	    let audioElement = document.createElement("audio");
+	    audioElement.setAttribute("src", "assets/sound/command.mp3");
+	    audioElement.play();
+
 		starship = $("#starship").val().trim();
 		starbase = $("#starbase").val().trim();
 		launchTime = $("#launch").val().trim();
@@ -86,7 +90,10 @@ $(document).ready(function () {
     	console.log("Current U Time: " + currentTimeU);
 
     let dateSD = moment(currentTime).format("DDDD");
-    let stardateL = 5000 + 1000 * dateSD / 365
+    let hourSD = moment(currentTime).format("HH");
+    let stardateH = 2.74 * hourSD / 24
+    let stardateL = stardateH + 5000 + 1000 * dateSD / 365
+
     let stardateR = Math.round(stardateL * 10) / 10
     	console.log("Stardate: " + stardateR);
 		$("#stardate").text("Current Stardate: " + stardateR);
@@ -172,9 +179,9 @@ $(document).ready(function () {
       	let shipHtml = $("<td>").text("USS " + snapshot.val().starship);
       	let registeryHtml = $("<td>").text("NCC-1" + snapshot.val().registery);
       	let starbaseHtml = $("<td>").text(snapshot.val().starbase);
-      	let durationHtml = $("<td>").text(snapshot.val().duration);
+      	let durationHtml = $("<td>").text(snapshot.val().duration + " Minutes");
       	let nextArrivalHtml = $("<td>").text(nextArrivalM);
-      	let etaHtml = $("<td>").text(etaM);
+      	let etaHtml = $("<td>").text(etaM + " Minutes");
 
       	tableHtml.append(shipHtml).append(registeryHtml).append(starbaseHtml).append(durationHtml).append(nextArrivalHtml).append(etaHtml);
 
