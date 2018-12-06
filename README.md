@@ -1,6 +1,8 @@
 # Train-Scheduler
 
-This is the ReadMe file for my “Ship Patrol” Train Scheduler.  It was the assignment for the 8th week at Web Developer Bootcamp.  
+This is the ReadMe file for my “Ship Patrol” Train Scheduler.  It was the assignment for the 8th week at Web Developer Bootcamp. 
+
+![alt text](/Image1.jpg?raw=true "1st pic")  
 
 A program allows one to keep track of the estimated times of arrival of various starships on patrol.  It also allows the user to launch more starships to patrol around their starbase of choice.  The display is designed to mimic the computer interfaces used by Starfleet in the late 23rd Century. 
 
